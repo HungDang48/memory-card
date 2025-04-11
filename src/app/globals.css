@@ -9,6 +9,30 @@
     --foreground: #ededed;
   }
 }
+/* Biến cho light mode (mặc định) */
+:root {
+  --bg-color: #ffffff;
+  --text-color: #000000;
+  --card-bg: #f0f0f0;
+  --card-border: #cccccc;
+}
+
+/* Biến cho dark mode */
+[data-theme='dark'] {
+  --bg-color: #121212;
+  --text-color: #ffffff;
+  --card-bg: #1e1e1e;
+  --card-border: #444444;
+}
+
+/* Body áp dụng biến */
+body {
+  background-color: var(--bg-color);
+  color: var(--text-color);
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+
 
 html,
 body {
