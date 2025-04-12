@@ -1,5 +1,5 @@
  
-import styles from "./page.module.css";
+ 
 import GameBoard from "@/components/GameBoard/GameBoard";
 
 export default function Home() {
