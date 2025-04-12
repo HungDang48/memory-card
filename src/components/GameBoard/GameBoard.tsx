@@ -140,6 +140,15 @@ const GameBoard = () => {
 
   return (
     <div className="game-container">
+      {/* Video nền */}
+      <div className="video-background">
+        <video autoPlay loop muted>
+          <source src="/video/background1.mp4" type="video/mp4" />
+          Your browser does not support the video tag.
+        </video>
+        <div className="video-overlay"></div> {/* Lớp phủ */}
+      </div>
+
       <div className="status-bar">
         <span>Level {level}</span>
         <span>Time left: {time}s</span>
