@@ -29,21 +29,24 @@ const GameBoard = () => {
   const [cards, setCards] = useState<CardType[]>([]);
   const [flippedIndices, setFlippedIndices] = useState<number[]>([]);
   const [level, setLevel] = useState<number>(1);
-  const [time, setTime] = useState<number>(60);
+  const [time, setTime] = useState<number>(60); // Thời gian ban đầu là 60 giây
   const [isActive, setIsActive] = useState<boolean>(false);
 
+  // Hàm sinh emoji theo level
   const generateLevelEmoji = (lvl: number) => {
     return emojiList.slice(0, lvl * 3);
   };
 
+  // Reset game sau khi thay đổi cấp độ hoặc game kết thúc
   useEffect(() => {
     const newEmojis = generateLevelEmoji(level);
     setCards(shuffleArray(newEmojis));
     setFlippedIndices([]);
-    setTime(60);
-    setIsActive(true);
+    setTime(60 + level * 5); // Tăng thêm 5 giây cho mỗi level
+    setIsActive(true); // Bắt đầu lại thời gian
   }, [level]);
 
+  // Hàm xử lý đếm ngược thời gian và kiểm tra khi hết giờ
   useEffect(() => {
     let interval: NodeJS.Timeout;
     if (isActive && time > 0) {
@@ -52,12 +55,16 @@ const GameBoard = () => {
       }, 1000);
     } else if (time === 0) {
       setIsActive(false);
-      alert("Hết giờ! Thử lại level này nhé.");
-      setLevel((prev) => prev);
+      alert("Hết giờ! Quay lại Level 1.");
+      setLevel(1); // Reset level về 1
+      setTime(60); // Đặt lại thời gian
+      setCards([]); // Reset cards
+      setFlippedIndices([]); // Reset flipped indices
     }
     return () => clearInterval(interval);
   }, [isActive, time]);
 
+  // Hàm xử lý khi người chơi nhấp vào thẻ
   const handleCardClick = (index: number) => {
     if (cards[index].isFlipped || cards[index].isMatched || flippedIndices.length === 2) {
       return;
@@ -94,6 +101,7 @@ const GameBoard = () => {
     }
   };
 
+  // Kiểm tra khi hoàn thành level
   useEffect(() => {
     if (cards.length > 0 && cards.every((card) => card.isMatched)) {
       setIsActive(false);
