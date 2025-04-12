@@ -16,7 +16,12 @@ const geistMono = Geist_Mono({
 export const metadata: Metadata = {
   title: "Memory card",
   description: "Memory card",
+  icons: {
+    icon: "/logo2.png", //   logo2.png nằm trong thư mục public
+  },
 };
+
+
 
 export default function RootLayout({
   children,
