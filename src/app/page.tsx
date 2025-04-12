@@ -1,4 +1,4 @@
-import Image from "next/image";
+ 
 import styles from "./page.module.css";
 import GameBoard from "@/components/GameBoard/GameBoard";
 
